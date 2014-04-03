@@ -14,7 +14,16 @@ class Oynx_Back
 		create_file_stubs()
 	end
 
+	def upload(compress)
+		compress_site() if compress
+		info = get_serv_info()
+	end
+
 	private
+
+	##################
+	# Creating methods
+	##################
 
 	def create_root()
 		tmp = File.join(Dir.pwd, @config["name"])
@@ -85,4 +94,10 @@ class Oynx_Back
 			File.open(js_file, "a")
 		end
 	end
+
+	###################
+	# Uploading methods
+	###################
+
+	# Compresses the site
 end

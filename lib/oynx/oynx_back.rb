@@ -1,3 +1,6 @@
+require "rubygems"
+require "zip"
+
 require_relative './config'
 
 class Oynx_Back
@@ -14,9 +17,19 @@ class Oynx_Back
 		create_file_stubs()
 	end
 
-	def upload(compress)
-		compress_site() if compress
-		info = get_serv_info()
+	def Oynx_Back.upload(options, config)
+		user  = options[:user]
+		pass  = options[:pass]
+		dir   = options[:dir]
+		server = options[:server]
+		port = options[:port]
+		compress = options[:compress] if not options[:compress] else true
+		if options[:compress] then
+			Oynx_Back.compress_site(config)
+			#system "scp #{config["name"]}.zip "
+		else
+
+		end
 	end
 
 	private
@@ -100,4 +113,14 @@ class Oynx_Back
 	###################
 
 	# Compresses the site
+	def Oynx_Back.compress_site(config)
+		dir     = @root
+		archive = File.join(Dir.pwd, "#{config["name"]}.zip")
+
+		Zip::File.open(archive, Zip::File::CREATE) do |zipfile|
+			Dir[File.join(dir, '**', '**')].each do |file|
+		      	zipfile.add(file.sub(dir, ''), file)
+		    end
+		end
+	end
 end

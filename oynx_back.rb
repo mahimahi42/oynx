@@ -1,7 +1,9 @@
+require './config'
+
 class Oynx_Back
 	attr_writer :config
 
-	def initialize(config = {"name"=>"new_site", "charset"=>"utf-8"})
+	def initialize(config = Web_Config.new)
 		@config = config
 		@root = nil
 	end

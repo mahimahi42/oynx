@@ -8,7 +8,9 @@ class Oynx < Thor
 		`oynx new` will create a new website in the current directory.
 
 		Optional Parameters
-		-------------------
+		\x5-------------------
+
+		--default     - Create a site with default information
 
 		--name "NAME" - Specify the site's name.
 	LONGDESC
@@ -16,17 +18,13 @@ class Oynx < Thor
 	option :default, :type => :boolean
 	def new
 		if options[:default] then
-			o = Oynx_Back.new
-			o.create_site()
+			Oynx_Back.new.create_site()
 		else
-			puts "Your site is named #{options[:name]}" if options[:name]
-			puts "Hello, world!"
-
-			if options[:name] then
-				c = {"name" => options[:name]}
-				o = Oynx_Back.new(c)
-				o.create_site()
+			config = {}
+			if options[:name]
+				config["name"] = options[:name]
 			end
+			Oynx_Back.new(c).create_site
 		end
 	end
 end

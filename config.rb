@@ -1,21 +1,14 @@
-class Web_Config
-	attr_reader :config
-
+class Web_Config < Hash
 	def initialize()
-		@config = {}
-	end
-
-	def set_name(name)
-		@config["name"] = name
-	end
-
-	def set_charset(chst)
-		@config["charset"] = chst
+		self["name"]    = "new_site"
+		self["charset"] = "utf-8"
+		self["css"]     = true
+		self["js"]      = true
 	end
 
 	def to_s()
 		ret = ""
-		@config.each_pair do |key, val|
+		self.each_pair do |key, val|
 			ret += "#{key}: #{val}\n"
 		end
 		return ret

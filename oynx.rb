@@ -1,5 +1,4 @@
 #require './config'
-require 'thor'
 
 class Oynx
 	attr_writer :config

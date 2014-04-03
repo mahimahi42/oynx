@@ -4,6 +4,7 @@ class Web_Config < Hash
 		self["charset"] = "utf-8"
 		self["css"]     = true
 		self["js"]      = true
+		self["img"]     = true
 	end
 
 	def to_s()

@@ -23,13 +23,30 @@ class Oynx_Back
 	end
 
 	def create_inner_folders()
-		css = File.join(@root, "css")
-		img = File.join(@root, "img")
-		js  = File.join(@root, "js")
+		create_css_folder()
+		create_img_folder()
+		create_js_folder()
+	end
 
-		Dir.mkdir(css)
-		Dir.mkdir(img)
-		Dir.mkdir(js)
+	def create_css_folder()
+		if @config["css"]
+			css = File.join(@root, "css")
+			Dir.mkdir(css)
+		end
+	end
+
+	def create_img_folder()
+		if @config["img"]
+			img = File.join(@root, "img")
+			Dir.mkdir(img)
+		end
+	end
+
+	def create_js_folder()
+		if @config["js"]
+			js = File.join(@root, "js")
+			Dir.mkdir(js)
+		end
 	end
 
 	def create_file_stubs()
@@ -46,11 +63,23 @@ class Oynx_Back
 			</html>"
 
 		index_file = File.join(@root, "index.html")
-		css_file   = File.join(@root, "css/styles.css")
-		js_file    = File.join(@root, "js/scripts.js")
-
 		File.open(index_file, "a") {|f| f.write(index_text)}
-		File.open(css_file, "a")
-		File.open(js_file, "a")
+
+		create_css_file_stubs()
+		create_js_file_stubs()
+	end
+
+	def create_css_file_stubs()
+		if @config["css"] then
+			css_file = File.join(@root, "css/styles.css")
+			File.open(css_file, "a")
+		end
+	end
+
+	def create_js_file_stubs()
+		if @config["js"] then
+			js_file = File.join(@root, "js/scripts.js")
+			File.open(js_file, "a")
+		end
 	end
 end

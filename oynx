@@ -13,14 +13,20 @@ class Oynx < Thor
 		--name "NAME" - Specify the site's name.
 	LONGDESC
 	option :name
+	option :default, :type => :boolean
 	def new
-		puts "Your site is named #{options[:name]}" if options[:name]
-		puts "Hello, world!"
-
-		if options[:name] then
-			c = {"name" => options[:name]}
-			o = Oynx_Back.new(c)
+		if options[:default] then
+			o = Oynx_Back.new
 			o.create_site()
+		else
+			puts "Your site is named #{options[:name]}" if options[:name]
+			puts "Hello, world!"
+
+			if options[:name] then
+				c = {"name" => options[:name]}
+				o = Oynx_Back.new(c)
+				o.create_site()
+			end
 		end
 	end
 end

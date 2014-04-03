@@ -1,0 +1,28 @@
+require 'thor'
+
+require './oynx_back'
+
+class Oynx < Thor
+	desc "new", "create a new website"
+	long_desc <<-LONGDESC
+		`oynx new` will create a new website in the current directory.
+
+		Optional Parameters
+		-------------------
+
+		--name "NAME" - Specify the site's name.
+	LONGDESC
+	option :name
+	def new
+		puts "Your site is named #{options[:name]}" if options[:name]
+		puts "Hello, world!"
+
+		if options[:name] then
+			c = {"name" => options[:name]}
+			o = Oynx_Back.new(c)
+			o.create_site()
+		end
+	end
+end
+
+Oynx.start(ARGV)

@@ -1,10 +1,7 @@
-#require './config'
-require 'thor'
-
-class Oynx < Thor
+class Oynx_Back
 	attr_writer :config
 
-	def initialize(config = {"name"=>""})
+	def initialize(config = {"name"=>"", "charset"=>"utf-8"})
 		@config = config
 		@root = nil
 	end
@@ -37,6 +34,7 @@ class Oynx < Thor
 		index_text = "<!DOCTYPE HTML>
 			<html>
 				<head>
+					<meta charset='#{@config["charset"]}'>
 					<meta name='viewport' content='width=device-width,initial-scale=1.0'>
 				</head>
 

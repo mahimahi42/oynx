@@ -1,6 +1,7 @@
 #require './config'
+require 'thor'
 
-class Oynx
+class Oynx < Thor
 	attr_writer :config
 
 	def initialize(config = {"name"=>""})

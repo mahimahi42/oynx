@@ -1,7 +1,7 @@
 class Web_Config
 	attr_reader :config
 
-	def initialize
+	def initialize()
 		@config = {}
 	end
 
@@ -13,7 +13,7 @@ class Web_Config
 		@config["charset"] = chst
 	end
 
-	def to_s
+	def to_s()
 		ret = ""
 		@config.each_pair do |key, val|
 			ret += "#{key}: #{val}\n"

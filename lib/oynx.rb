@@ -15,7 +15,7 @@ module Oynx
   			--default        - Create a site with default information.
 
   			--name "NAME"    - Specify the site's name.
-  			\x5--charset "CHSH" - Specify the charset to use.
+  			\x5--charset "CHST" - Specify the charset to use.
   			\x5--no-css         - Don't create a CSS folder or stubs.
   			\x5--no-img         - Don't create an image folder.
   			\x5--no-js          - Don't create a JS folder or stubs.

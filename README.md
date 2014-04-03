@@ -35,7 +35,7 @@ Or install it yourself as:
 	OR
 
 	--name NAME    - Specify site name
-	--charset CHSH - Specify the charset to use
+	--charset CHST - Specify the charset to use
 	--no-css       - Don't create a CSS folder/stubs
 	--no-img       - Don't create an image folder
 	--no-js        - Don't create a JS folder/stubs

@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'oynx'
+
+Oynx::Oynx_CLI.start(ARGV)

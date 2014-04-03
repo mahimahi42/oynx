@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["me@bryceadavis.com"]
   spec.summary       = %q{Oynx WebDev Helper}
   spec.description   = %q{Oynx simplifies several aspects of web development}
-  spec.homepage      = "http://bryceadavis.com"
+  spec.homepage      = "https://github.com/mahimahi42/oynx.git"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

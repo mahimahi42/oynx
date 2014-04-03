@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'thor'
 
 require './oynx_back'
@@ -13,10 +15,10 @@ class Oynx < Thor
 		--default        - Create a site with default information.
 
 		--name "NAME"    - Specify the site's name.
-		--charset "CHSH" - Specify the charset to use.
-		--no-css         - Don't create a CSS folder or stubs.
-		--no-img         - Don't create an image folder.
-		--no-js          - Don't create a JS folder or stubs.
+		\x5--charset "CHSH" - Specify the charset to use.
+		\x5--no-css         - Don't create a CSS folder or stubs.
+		\x5--no-img         - Don't create an image folder.
+		\x5--no-js          - Don't create a JS folder or stubs.
 	LONGDESC
 	option :default, :type => :boolean, :aliases => :d
 	option :name

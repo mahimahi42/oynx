@@ -1,3 +1,5 @@
+require './config'
+
 module Setup
 	def Setup.welcome()
 		puts "Welcome to Oynx!"
@@ -9,7 +11,7 @@ module Setup
 		puts "First, let's get some info about the site."
 		name = Setup.get_site_name()
 		chst = Setup.set_charset()
-		puts name, chst
+		c = Setup.finish_config(name, chst)
 	end
 
 	private
@@ -29,5 +31,12 @@ module Setup
 			else
 				return input
 		end
+	end
+
+	def Setup.finish_config(name, chst)
+		config = Web_Config.new
+		config.set_name(name)
+		config.set_charset(chst)
+		return config
 	end
 end

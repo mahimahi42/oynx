@@ -1,7 +1,7 @@
 require "thor"
 
 require "oynx/version"
-require_relative "oynx/oynx_back"
+require "oynx/oynx_back"
 
 module Oynx
   	class Oynx_CLI < Thor

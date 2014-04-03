@@ -1,4 +1,4 @@
-require './config'
+require_relative './config'
 
 class Oynx_Back
 	attr_writer :config

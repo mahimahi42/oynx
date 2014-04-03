@@ -55,10 +55,13 @@ class Oynx_Back
 				<head>
 					<meta charset='#{@config["charset"]}'>
 					<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+					<link rel='stylesheet' type='text/css' href='css/styles.css'>
 				</head>
 
 				<body>
 
+					<!-- Scripts at the end for faster page loading -->
+					<script src='js/scripts.js'></script>
 				</body>
 			</html>"
 

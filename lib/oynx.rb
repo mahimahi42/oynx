@@ -62,9 +62,9 @@ module Oynx
         option :server, :aliases => :s, :required => true
         option :port, :aliases => :n, :type => :numeric, :required => true
         option :user, :aliases => :u, :required => true
-        option :pass, :aliases => :p, :required => true
+        #option :pass, :aliases => :p, :required => true
         option :dir, :aliases => :d, :required => true
-        option :compress, :aliases => :c, :type => :boolean, :required => true
+        option :compress, :aliases => :c, :type => :boolean
         def upload
             Oynx_Back.upload(options, config["name"], File.join(Dir.pwd, config["name"]))
         end

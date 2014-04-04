@@ -19,14 +19,13 @@ class Oynx_Back
 
 	def Oynx_Back.upload(options, site_name, dir)
 		user  = options[:user]
-		pass  = options[:pass]
 		dir   = options[:dir]
 		server = options[:server]
 		port = options[:port]
 		compress = options[:compress] if not options[:compress] else true
 		if options[:compress] then
 			Oynx_Back.compress_site(site_name)
-			#system "scp #{config["name"]}.zip "
+			system "scp -P #{port} #{site_name}.zip #{user}@#{server}:#{dir}/#{site_name}.zip"
 		else
 
 		end

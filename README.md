@@ -46,7 +46,7 @@ Or install it yourself as:
 
 	$ oynx upload
 
-#### Parameters
+#### Required Parameters
 
 	--server, -s "URL/IP" - Server URL/IP Address
     --port, -n "PORT"     - Port to use

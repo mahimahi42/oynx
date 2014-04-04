@@ -26,9 +26,11 @@ Or install it yourself as:
 
 ## Usage
 
+### Creating a site
+
 	$ oynx new
 
-### Parameters
+#### Parameters
 
 	--default      - create a default site
 
@@ -39,6 +41,18 @@ Or install it yourself as:
 	--no-css       - Don't create a CSS folder/stubs
 	--no-img       - Don't create an image folder
 	--no-js        - Don't create a JS folder/stubs
+
+### Uploading a site
+
+	$ oynx upload
+
+#### Parameters
+
+	--server, -s "URL/IP" - Server URL/IP Address
+    --port, -n "PORT"     - Port to use
+    --user, -u "USERNAME" - Username
+    --dir, -d "DIRECTORY" - Directory to use
+    --compress, -c / --no-compress - Compresses the site / Doesn't compress the site
 
 ## Contributing
 

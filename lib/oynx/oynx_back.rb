@@ -3,17 +3,25 @@ require "zip"
 
 require_relative './config'
 
+##
+# This is the Oynx backend. Most of the actual work done by Oynx
+# is done here
 class Oynx_Back
+	##
+	# +config+ is our website configuration, while +root+ is the
+	# root directory for the website
 	attr_writer :config, :root
 
-	# Set our configuration to either a blank configuration or one
-	# supplied by the application. @root is the root folder of the
-	# site
+	##
+	# Set our +@config+ to either a blank configuration or one
+	# supplied by the application, and set our +@root+ to nil
+	# for now.
 	def initialize(config = Web_Config.new)
 		@config = config
 		@root = nil
 	end
 
+	##
 	# Call the various methods to create the website
 	def create_site()
 		create_root()
@@ -21,8 +29,15 @@ class Oynx_Back
 		create_file_stubs()
 	end
 
+	##
 	# Compress the site if specified, then upload it using `scp`
 	# This is a class method due to quirks with Thor
+	#
+	# == Parameters
+	#
+	# +options+   - CLI options we get from Thor
+	# +site_name+ - Name of the website
+	# +dir+       - Directory on the server to use
 	def Oynx_Back.upload(options, site_name, dir)
 		user  = options[:user]
 		dir   = options[:dir]
@@ -43,6 +58,7 @@ class Oynx_Back
 	# Creating methods
 	##################
 
+	##
 	# Create the root folder for our site
 	def create_root()
 		tmp = File.join(Dir.pwd, @config["name"])
@@ -50,6 +66,7 @@ class Oynx_Back
 		@root = tmp
 	end
 
+	##
 	# Call the various methods to create our folders
 	def create_inner_folders()
 		create_css_folder()
@@ -57,6 +74,7 @@ class Oynx_Back
 		create_js_folder()
 	end
 
+	##
 	# Create a CSS folder if specified
 	def create_css_folder()
 		if @config["css"]
@@ -65,6 +83,7 @@ class Oynx_Back
 		end
 	end
 
+	##
 	# Create an image folder if specified
 	def create_img_folder()
 		if @config["img"]
@@ -73,6 +92,7 @@ class Oynx_Back
 		end
 	end
 
+	##
 	# Create a JS folder if specified
 	def create_js_folder()
 		if @config["js"]
@@ -81,6 +101,7 @@ class Oynx_Back
 		end
 	end
 
+	##
 	# First create our index.html template, then call the methods
 	# to create css and js stubs
 	def create_file_stubs()
@@ -106,6 +127,7 @@ class Oynx_Back
 		create_js_file_stubs()
 	end
 
+	##
 	# Creates a css stub file if specified
 	def create_css_file_stubs()
 		if @config["css"] then
@@ -114,6 +136,7 @@ class Oynx_Back
 		end
 	end
 
+	##
 	# Creates a js stub file if specified
 	def create_js_file_stubs()
 		if @config["js"] then
@@ -126,6 +149,7 @@ class Oynx_Back
 	# Uploading methods
 	###################
 
+	##
 	# Compresses the site
 	def Oynx_Back.compress_site(name)
 		archive  = File.join(Dir.pwd, "#{name}.zip")

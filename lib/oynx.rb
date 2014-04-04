@@ -53,7 +53,6 @@ module Oynx
             --server, -s "URL/IP" - Server URL/IP Address
             \x5--port, -n "PORT"     - Port to use
             \x5--user, -u "USERNAME" - Username
-            \x5--pass, -p "PASSWORD" - Password
             \x5--dir, -d "DIRECTORY" - Directory to use
             \x5--compress, -c / --no-compress - Compresses the site / Doesn't compress the site
         LONGDESC

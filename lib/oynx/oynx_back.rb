@@ -4,7 +4,7 @@ require "zip"
 require_relative './config'
 
 class Oynx_Back
-	attr_writer :config
+	attr_writer :config, :root
 
 	def initialize(config = Web_Config.new)
 		@config = config
@@ -17,7 +17,7 @@ class Oynx_Back
 		create_file_stubs()
 	end
 
-	def Oynx_Back.upload(options, config)
+	def Oynx_Back.upload(options, site_name, dir)
 		user  = options[:user]
 		pass  = options[:pass]
 		dir   = options[:dir]
@@ -25,7 +25,7 @@ class Oynx_Back
 		port = options[:port]
 		compress = options[:compress] if not options[:compress] else true
 		if options[:compress] then
-			Oynx_Back.compress_site(config)
+			Oynx_Back.compress_site(site_name)
 			#system "scp #{config["name"]}.zip "
 		else
 
@@ -41,7 +41,7 @@ class Oynx_Back
 	def create_root()
 		tmp = File.join(Dir.pwd, @config["name"])
 		Dir.mkdir(tmp)
-		@root = Dir.new(tmp)
+		@root = tmp
 	end
 
 	def create_inner_folders()
@@ -113,13 +113,15 @@ class Oynx_Back
 	###################
 
 	# Compresses the site
-	def Oynx_Back.compress_site(config)
-		dir     = @root
-		archive = File.join(Dir.pwd, "#{config["name"]}.zip")
+	def Oynx_Back.compress_site(name)
+		archive  = File.join(Dir.pwd, "#{name}.zip")
+		arch_dir = File.join(Dir.pwd, "#{name}")
+		files    = Dir[File.join(arch_dir, "**", "**")]
 
 		Zip::File.open(archive, Zip::File::CREATE) do |zipfile|
-			Dir[File.join(dir, '**', '**')].each do |file|
-		      	zipfile.add(file.sub(dir, ''), file)
+			files.each do |file|
+				filename = "#{arch_dir}/#{file}"
+		      	zipfile.add(file.sub("#{arch_dir}/", ""), file)
 		    end
 		end
 	end

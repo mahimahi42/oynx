@@ -6,9 +6,7 @@ require "oynx/config"
 
 module Oynx
   	class Oynx_CLI < Thor
-        attr_accessor :config
-
-        @@config = Web_Config.new
+      attr_accessor :site
 
   		desc "new", "create a new website"
   		long_desc <<-LONGDESC
@@ -33,17 +31,17 @@ module Oynx
   		option :img, :type => :boolean
   		def new
   			if options[:default] then
-  				Oynx_Back.new.create_site()
+                Oynx_Back.new.create_site()
   			else
-  				@@config = Web_Config.new
+  				#config = Web_Config.new
   				
-  				@@config["name"] = options[:name] if options[:name]
-  				@@config["charset"] = options[:charset] if options[:charset]
-  				@@config["css"] = options[:css] if not options[:css]
-  				@@config["js"] = options[:js] if not options[:js]
-  				@@config["img"] = options[:img] if not options[:img]
+  				config["name"] = options[:name] if options[:name]
+  				config["charset"] = options[:charset] if options[:charset]
+  				config["css"] = options[:css] if not options[:css]
+  				config["js"] = options[:js] if not options[:js]
+  				config["img"] = options[:img] if not options[:img]
 
-  				Oynx_Back.new(@@config).create_site
+  				@site = Oynx_Back.new(config).create_site
   			end
   		end
 
@@ -59,20 +57,22 @@ module Oynx
             \x5--user, -u "USERNAME" - Username
             \x5--pass, -p "PASSWORD" - Password
             \x5--dir, -d "DIRECTORY" - Directory to use
-
-            Optional Parameters
-            \x5-------------------
-
-            --compress, -c - Compresses the site
+            \x5--compress, -c / --no-compress - Compresses the site / Doesn't compress the site
         LONGDESC
         option :server, :aliases => :s, :required => true
         option :port, :aliases => :n, :type => :numeric, :required => true
         option :user, :aliases => :u, :required => true
         option :pass, :aliases => :p, :required => true
         option :dir, :aliases => :d, :required => true
-        option :compress, :aliases => :c, :type => :boolean
+        option :compress, :aliases => :c, :type => :boolean, :required => true
         def upload
-            Oynx_Back.upload(options, @@config)
+            Oynx_Back.upload(options, config["name"], File.join(Dir.pwd, config["name"]))
+        end
+
+        private
+
+        def config
+            @config ||= Web_Config.new
         end
   	end
 end

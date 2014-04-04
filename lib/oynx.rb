@@ -5,8 +5,10 @@ require "oynx/oynx_back"
 require "oynx/config"
 
 module Oynx
+    ##
+    # This class connects Oynx with Thor, to allow passing of CLI
+    # options. This is what the user will interact with.
   	class Oynx_CLI < Thor
-      attr_accessor :site
 
   		desc "new", "create a new website"
   		long_desc <<-LONGDESC
@@ -29,6 +31,10 @@ module Oynx
   		option :css, :type => :boolean
   		option :js, :type => :boolean
   		option :img, :type => :boolean
+        ##
+        # If the user wants a +default+ website, create one.
+        # Else, gather our options into a configuration and
+        # create the site from that.
   		def new
   			if options[:default] then
                 Oynx_Back.new.create_site()
@@ -39,7 +45,7 @@ module Oynx
   				config["js"] = options[:js] if not options[:js]
   				config["img"] = options[:img] if not options[:img]
 
-  				@site = Oynx_Back.new(config).create_site
+  				Oynx_Back.new(config).create_site
   			end
   		end
 
@@ -61,12 +67,17 @@ module Oynx
         option :user, :aliases => :u, :required => true
         option :dir, :aliases => :d, :required => true
         option :compress, :aliases => :c, :type => :boolean
+        ##
+        # Uploads the site using the Oynx backend.
         def upload
             Oynx_Back.upload(options, config["name"], File.join(Dir.pwd, config["name"]))
         end
 
         private
 
+        ##
+        # Due to a Thor quirk, this is the best way to have a class variable,
+        # so we can store our website configuration
         def config
             @config ||= Web_Config.new
         end

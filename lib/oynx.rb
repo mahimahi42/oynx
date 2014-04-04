@@ -33,8 +33,6 @@ module Oynx
   			if options[:default] then
                 Oynx_Back.new.create_site()
   			else
-  				#config = Web_Config.new
-  				
   				config["name"] = options[:name] if options[:name]
   				config["charset"] = options[:charset] if options[:charset]
   				config["css"] = options[:css] if not options[:css]
@@ -62,7 +60,6 @@ module Oynx
         option :server, :aliases => :s, :required => true
         option :port, :aliases => :n, :type => :numeric, :required => true
         option :user, :aliases => :u, :required => true
-        #option :pass, :aliases => :p, :required => true
         option :dir, :aliases => :d, :required => true
         option :compress, :aliases => :c, :type => :boolean
         def upload

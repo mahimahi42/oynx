@@ -27,7 +27,7 @@ class Oynx_Back
 			Oynx_Back.compress_site(site_name)
 			system "scp -P #{port} #{site_name}.zip #{user}@#{server}:#{dir}/#{site_name}.zip"
 		else
-
+			system "scp -P #{port} -r #{site_name} #{user}@#{server}:#{dir}/#{site_name}"
 		end
 	end
 

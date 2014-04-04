@@ -6,17 +6,23 @@ require_relative './config'
 class Oynx_Back
 	attr_writer :config, :root
 
+	# Set our configuration to either a blank configuration or one
+	# supplied by the application. @root is the root folder of the
+	# site
 	def initialize(config = Web_Config.new)
 		@config = config
 		@root = nil
 	end
 
+	# Call the various methods to create the website
 	def create_site()
 		create_root()
 		create_inner_folders()
 		create_file_stubs()
 	end
 
+	# Compress the site if specified, then upload it using `scp`
+	# This is a class method due to quirks with Thor
 	def Oynx_Back.upload(options, site_name, dir)
 		user  = options[:user]
 		dir   = options[:dir]
@@ -37,18 +43,21 @@ class Oynx_Back
 	# Creating methods
 	##################
 
+	# Create the root folder for our site
 	def create_root()
 		tmp = File.join(Dir.pwd, @config["name"])
 		Dir.mkdir(tmp)
 		@root = tmp
 	end
 
+	# Call the various methods to create our folders
 	def create_inner_folders()
 		create_css_folder()
 		create_img_folder()
 		create_js_folder()
 	end
 
+	# Create a CSS folder if specified
 	def create_css_folder()
 		if @config["css"]
 			css = File.join(@root, "css")
@@ -56,6 +65,7 @@ class Oynx_Back
 		end
 	end
 
+	# Create an image folder if specified
 	def create_img_folder()
 		if @config["img"]
 			img = File.join(@root, "img")
@@ -63,6 +73,7 @@ class Oynx_Back
 		end
 	end
 
+	# Create a JS folder if specified
 	def create_js_folder()
 		if @config["js"]
 			js = File.join(@root, "js")
@@ -70,6 +81,8 @@ class Oynx_Back
 		end
 	end
 
+	# First create our index.html template, then call the methods
+	# to create css and js stubs
 	def create_file_stubs()
 		index_text = "<!DOCTYPE HTML>
 			<html>
@@ -93,6 +106,7 @@ class Oynx_Back
 		create_js_file_stubs()
 	end
 
+	# Creates a css stub file if specified
 	def create_css_file_stubs()
 		if @config["css"] then
 			css_file = File.join(@root, "css/styles.css")
@@ -100,6 +114,7 @@ class Oynx_Back
 		end
 	end
 
+	# Creates a js stub file if specified
 	def create_js_file_stubs()
 		if @config["js"] then
 			js_file = File.join(@root, "js/scripts.js")
